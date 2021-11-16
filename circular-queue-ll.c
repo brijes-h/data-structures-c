@@ -23,32 +23,40 @@ void enqueue (int val)
 {
     Node *newNode = create (val);
     
-    if (front == NULL) {
+    if (front == NULL && rear == NULL) {
         front = newNode;
         rear = newNode;
     }
     else {
         rear -> next = newNode;
         rear = newNode;
+        rear -> next = front;
     }
-    rear -> next = front;
 }
 
 void dequeue ()
 {
-    if (front == NULL) {
+    if (front == NULL && rear == NULL) {
         printf ("The queue is empty.");
     }
+
+    else if (front == rear) { 
+        Node* temp = front;
+        front = rear = NULL;
+        free (temp);
+    }
+
     else {
         Node* temp = front;
         front = front -> next;
+        rear -> next = front;  // update the link btw rear and front
         free (temp);
     }
 }
 
 void display ()
 {
-    if (front == NULL)
+    if (front == NULL && rear == NULL)
     printf("The queue is empty.");
     else {
         Node* temp = front;
@@ -67,7 +75,8 @@ int main ()
     enqueue(3);
     enqueue(4);
     enqueue(5);
-    //dequeue();
+    dequeue();
+    dequeue();
     display();
     return 0;
 }
