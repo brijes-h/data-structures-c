@@ -41,10 +41,30 @@ void preorder (Node* root)  // traversal order: ROOT -> Left -> Right
     }
 }
 
+void inorder (Node* root)
+{
+    if (root != NULL)
+    {
+        inorder (root -> left);
+        printf("%d  ", root -> data);
+        inorder (root -> right);
+    }
+}
+
+void postorder (Node* root)
+{
+    if (root != NULL)
+    {
+        postorder (root -> left);
+        postorder (root -> right);
+        printf("%d  ", root -> data);
+    }
+}
+
 int main ()
 {
     Node* root;
     root = create();
-    preorder (root);
+    inorder (root);
     return 0;
 }
