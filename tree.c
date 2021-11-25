@@ -31,6 +31,20 @@ Node* create ()
     return newNode;
 }
 
+int height (Node* root)  // recursive function to find height of the tree
+{
+    if (root == NULL);
+        return -1;
+    
+    int lt = height (root -> left);
+    int rt = height (root -> right);
+    
+    if (lt > rt)
+        return lt + 1;
+    else
+        return rt + 1;
+}
+
 void preorder (Node* root)  // traversal order: ROOT -> Left -> Right
 {
     if (root != NULL)
@@ -58,6 +72,17 @@ void postorder (Node* root)
         postorder (root -> left);
         postorder (root -> right);
         printf("%d  ", root -> data);
+    }
+}
+
+void levelOrder (Node* root, int level)
+{
+    if (level == 1)
+        printf ("%d ", root -> data);
+    else if (level > 1)
+    {
+        levelOrder(root -> left, level);
+        levelOrder(root -> right, level);
     }
 }
 
