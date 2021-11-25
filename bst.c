@@ -39,6 +39,18 @@ Node* insert (Node* node, int key)
     return node;
 }   
 
+// Binary search function
+Node* search(Node* root, int key)
+{
+    if (root == NULL || root -> data == key)
+        return root;
+    
+    if (key > root->data)
+        return search(root->right, key);
+    
+    return search(root->left, key);
+}
+
 void inorder (Node* root)
 {
     if (root != NULL)
@@ -57,7 +69,17 @@ int main()
     insert(root, 60);
     insert(root, 10);
     insert(root, 32);
-    
+  
+    printf("Inorder traversal of the BST:\n"); 
     inorder(root);
+
+    printf ("\nEnter element to be searched: ");
+    scanf ("%d", &value);
+    // calling search function
+    if (search(root, value))
+        printf("%d is found in the BST!\n", value);
+    else
+        printf("%d is not found in the BST!", value);
+   
     return 0;
 }
