@@ -81,8 +81,8 @@ void levelOrder (Node* root, int level)
         printf ("%d ", root -> data);
     else if (level > 1)
     {
-        levelOrder(root -> left, level);
-        levelOrder(root -> right, level);
+        levelOrder(root -> left, level-1);
+        levelOrder(root -> right, level-1);
     }
 }
 
@@ -91,5 +91,6 @@ int main ()
     Node* root;
     root = create();
     inorder (root);
+    levelOrder(root, 2); // to print the 2nd level of the binary tree
     return 0;
 }
