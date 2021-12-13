@@ -1,3 +1,6 @@
+/* Binary Tree
+Height, Preorder, Inorder, Postorder, LCA
+*/
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -45,6 +48,24 @@ int height (Node* root)  // recursive function to find height of the tree
         return rt + 1;
 }
 
+Node* LCA(Node* root, int node1, int node2)
+{
+    Node* lf, *rf;
+    if (root == NULL)
+        return NULL;
+    if (root->data == node1 || root->data == node2)
+        return root;
+    lf = LCA(root->left, node1, node2);
+    rf = LCA(root->right, node1, node2);
+    
+    if (lf == NULL)
+        return rf;
+    else if (rf == NULL)
+        return lf;
+    else
+        return root;
+}
+
 void preorder (Node* root)  // traversal order: ROOT -> Left -> Right
 {
     if (root != NULL)
@@ -88,9 +109,14 @@ void levelOrder (Node* root, int level)
 
 int main ()
 {
-    Node* root;
+    int n1, n2;
+    Node* root, *res;
     root = create();
-    inorder (root);
-    levelOrder(root, 2); // to print the 2nd level of the binary tree
+    // inorder (root);
+    // levelOrder(root, 2); // to print the 2nd level of the binary tree
+    printf("Enter two nodes: ");
+    scanf("%d %d", &n1, &n2);
+    res = LCA(root, n1, n2);
+    printf("\nThe Lowest Common Ancestor is %d", res->data);
     return 0;
 }
